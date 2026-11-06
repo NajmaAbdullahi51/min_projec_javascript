@@ -1,0 +1,110 @@
+
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <style>
+        /* CSS: Qurxinta bogga */
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f7f6;
+            display: flex;
+            justify-content: center;
+            padding-top: 50px;
+        }
+        .container {
+            background: white;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+            width: 300px;
+        }
+        input {
+            width: 100%;
+            padding: 10px;
+            margin: 5px 0;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            box-sizing: border-box; /* Si aanay input-ka uga soo bixin container-ka */
+        }
+        button {
+            width: 100%;
+            padding: 10px;
+            background-color: #28a745;
+            color: white;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            margin-top: 10px;
+        }
+        button:hover {
+            background-color: #218838;
+        }
+        .car-item {
+            background: #e9ecef;
+            padding: 10px;
+            margin-top: 10px;
+            border-radius: 4px;
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <h3>Diiwaangelinta Baabuurta</h3>
+    <input type="text" id="make" placeholder="Magaca (Toyota)">
+    <input type="text" id="model" placeholder="Nooca ( Corolla)">
+    <input type="number" id="year" placeholder="Sanadka ( 2024)">
+    <button onclick="addCar()">Add Car</button>
+
+    <div id="displayArea"></div>
+</div>
+
+<script>
+    // JavaScript: Logic-ga mashruuca
+    class Car {
+        constructor(make, model, year) {
+            this.make = make;
+            this.model = model;
+            this.year = year;
+        }
+    }
+
+    let carsArray = [];
+
+    function addCar() {
+        const make = document.getElementById('make').value;
+        const model = document.getElementById('model').value;
+        const year = document.getElementById('year').value;
+
+        if (make === "" || model === "" || year === "") {
+            alert("Fadlan buuxi dhammaan meelaha banaan!");
+            return;
+        }
+
+        const newCar = new Car(make, model, year);
+        carsArray.push(newCar);
+
+        // Nadiifi inputs-ka
+        document.getElementById('make').value = "";
+        document.getElementById('model').value = "";
+        document.getElementById('year').value = "";
+
+        displayCars();
+    }
+
+    function displayCars() {
+        const displayArea = document.getElementById('displayArea');
+        displayArea.innerHTML = "<h4>Liiska Baabuurta:</h4>";
+
+        carsArray.forEach(car => {
+            displayArea.innerHTML += `
+                <div class="car-item">
+                    <strong>${car.make} ${car.model}</strong> (${car.year})
+                </div>`;
+        });
+    }
+</script>
+
+</body>
+</html>
